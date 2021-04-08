@@ -137,10 +137,7 @@ function getForm() {
   let obj={}
   if (formSelectDom.value=='' || textareaDom.value=='')return
   for (let i = 0; i < inputDom.length; i++) {
-    console.log(inputDom)
     if (inputDom[i].value=='')return
-    console.log(inputDom[i]['id'])
-    console.log(inputDom[i].value)
     obj[inputDom[i]['id']]=inputDom[i].value
   }
   obj.area=formSelectDom.value
