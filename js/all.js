@@ -52,84 +52,54 @@ function getData() {
 }
 
 
-function render(location) {
-  if(location!=undefined){
-    let str=''
-    let sum=0
-      data.forEach(item => {
-        if(item.area==location){
-          sum++;
-          str+=`
-          <li class="col-12 col-lg-4 list-unstyled mb-5">
-                      <div class="card shadow border-0">
-                          <div class="position-relative">
-                              <img src=${item.imgUrl} class="card-img-top d-block" alt="..." >
-                              <div class="position-absolute " style="top: -10px;">
-                                  <span class="badge badge-secondary text-white p-2 px-3">${item.area}</span>
-                              </div>
-                              <div class="position-absolute " style="bottom: -10px;">
-                                  <span class="badge badge-primary text-white ">${item.rate}</span>
-                              </div>
-                          </div>
-                          <div class="card-body">
-                              <h5 class="card-title text-primary font-weight-bolder border-bottom pb-3 ">${item.name}</h5>
-                              <p class="card-text">
-                                ${item.description}
-                              </p>
-                              <div class="d-flex align-items-center">
-                                  <p class="text-primary font-weight-bolder mb-0">
-                                      剩下最後 ${item.group} 組
-                                  </p>
-                                  <p class="text-primary font-weight-bolder ml-auto h3 mb-0">
-                                      <small>TWD</small>
-                                      $${item.price}
-                                  </p>
-                              </div>
-                          </div>
-                      </div>
-                  </li>
-          `
-        }
-      });
-    nowSelectDom.innerHTML=`本次搜尋共 ${sum} 筆資料`
-    listDom.innerHTML=str
-  }else{
-    let str=''
-      data.forEach(item => {
-        str+=`
-        <li class="col-12 col-lg-4 list-unstyled mb-5">
-                    <div class="card shadow border-0">
-                        <div class="position-relative">
-                            <img src=${item.imgUrl} class="card-img-top d-block" alt="..." >
-                            <div class="position-absolute " style="top: -10px;">
-                                <span class="badge badge-secondary text-white p-2 px-3">${item.area}</span>
-                            </div>
-                            <div class="position-absolute " style="bottom: -10px;">
-                                <span class="badge badge-primary text-white ">${item.rate}</span>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title text-primary font-weight-bolder border-bottom pb-3 ">${item.name}</h5>
-                            <p class="card-text">
-                              ${item.description}
-                            </p>
-                            <div class="d-flex align-items-center">
-                                <p class="text-primary font-weight-bolder mb-0">
-                                    剩下最後 ${item.group} 組
-                                </p>
-                                <p class="text-primary font-weight-bolder ml-auto h3 mb-0">
-                                    <small>TWD</small>
-                                    $${item.price}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-        `
-      });
-    listDom.innerHTML=str
-    nowSelectDom.innerHTML=`本次搜尋共 ${data.length} 筆資料`
-  }
+function render (location) {
+  let filterData
+  let str=''
+
+  filterData=data.filter(item=>{
+    if(!location){
+      return item
+    }
+    if(location){
+      return item.area==location
+    }
+  })
+
+  filterData.forEach(item=>{
+    str+=`
+      <li class="col-12 col-lg-4 list-unstyled mb-5">
+        <div class="card shadow border-0">
+            <div class="position-relative">
+                <img src=${item.imgUrl} class="card-img-top d-block" alt="..." >
+                <div class="position-absolute " style="top: -10px;">
+                    <span class="badge badge-secondary text-white p-2 px-3">${item.area}</span>
+                </div>
+                <div class="position-absolute " style="bottom: -10px;">
+                    <span class="badge badge-primary text-white ">${item.rate}</span>
+                </div>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title text-primary font-weight-bolder border-bottom pb-3 ">${item.name}</h5>
+                <p class="card-text">
+                  ${item.description}
+                </p>
+                <div class="d-flex align-items-center">
+                    <p class="text-primary font-weight-bolder mb-0">
+                        剩下最後 ${item.group} 組
+                    </p>
+                    <p class="text-primary font-weight-bolder ml-auto h3 mb-0">
+                        <small>TWD</small>
+                        $${item.price}
+                    </p>
+                </div>
+            </div>
+        </div>
+      </li>
+    `
+  })
+  
+  listDom.innerHTML=str
+  nowSelectDom.innerHTML=`本次搜尋共 ${filterData.length} 筆資料`
 }
 
 
