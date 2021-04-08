@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="widtd=device-widtd, initial-scale=1.0">
+    <title>Document</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.20/c3.min.css' integrity='sha512-cznfNokevSG7QPA5dZepud8taylLdvgr0lDqw/FEZIhluFsSwyvS81CMnRdrNSKwbsmc43LtRd2/WMQV+Z85AQ==' crossorigin='anonymous'/>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css'/>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <section class="m-7">
+        <div class="container">
+            <div class="p-6 shadow">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="d-block">
+                            <img src="img/undraw_Traveling_re_weve (1).png" alt="">
+                        </div>
+                        <div class="d-block">
+                            <img src="img/Let’s Travel !.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <h4 class="text-primary font-weight-bolder border-bottom pb-2">
+                            <i class="fas fa-plus-circle"></i>
+                            新增旅遊套票
+                        </h4>
+                        <form class="needs-validation" novalidate data-form action="">
+                            <div class="form-group row">
+                                <label for="name" class="col-sm-3 col-form-label text-secondary font-weight-bolder">套票名稱</label>
+                                <div class="col-sm-9">
+                                    <input type="text"  class="form-control " id="name" placeholder="請填寫套票名稱" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="imgUrl" class="col-sm-3 col-form-label text-secondary font-weight-bolder">圖片網址</label>
+                                <div class="col-sm-9">
+                                    <input type="url" class="form-control  " id="imgUrl" placeholder="請填寫圖片網址" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="location" class="col-sm-3 col-form-label text-secondary font-weight-bolder">景點地區</label>
+                                <div class="col-sm-9">
+                                    <select name="" id="location" class="form-control font-weight-bolder"required  data-formSelect>
+                                        <option selected disabled value="">請選擇景點地區</option>
+                                        <option value="台北">台北</option>
+                                        <option value="台中">台中</option>
+                                        <option value="高雄">高雄</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="price" class="col-sm-3 col-form-label text-secondary font-weight-bolder">套票金額</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control " id="price" placeholder="請填寫套票金額" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="group" class="col-sm-3 col-form-label text-secondary font-weight-bolder">套票組數</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control  " id="group" placeholder="請填寫套票組數" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="rate" class="col-sm-3 col-form-label text-secondary font-weight-bolder">套票星級</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control  " id="rate" placeholder="請填寫套票星級" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="description" class="col-sm-3 col-form-label text-secondary font-weight-bolder">套票描述</label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control " id="description" placeholder="請填寫套票描述(限100字)" required data-textarea></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary btn-lg" data-btn>新增套票</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-5" style="background-color: #F7F7F7;">
+        <div class="container">
+            <div class="row mb-6">
+                <div class="col-8">
+                    <div class="d-flex align-items-center ">
+                        <select class="custom-select" data-select>
+                            <option selected  disabled value="">地區搜索</option>
+                            <option value="台北">台北</option>
+                            <option value="台中">台中</option>
+                            <option value="高雄">高雄</option>
+                        </select>
+                        <p class="w-100 mb-0 ml-5" data-nowSelect>
+                            本次搜尋共 6 筆資料
+                        </p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div id="chart"></div>
+                </div>
+            </div>
+            <ul class="row" data-list>
+                <li class="col-12 col-lg-4 list-unstyled mb-5">
+                    <div class="card shadow border-0">
+                        <div class="position-relative">
+                            <img src="img/photo-1477894387642-00a731c511b3.png" class="card-img-top d-block" alt="..." >
+                            <div class="position-absolute " style="top: -10px;">
+                                <span class="badge badge-secondary text-white p-2 px-3">台北</span>
+                            </div>
+                            <div class="position-absolute " style="bottom: -10px;">
+                                <span class="badge badge-primary text-white ">8.6</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title text-primary font-weight-bolder border-bottom pb-3 ">綠島自由行套裝行程</h5>
+                            <p class="card-text">
+                                嚴選超高CP值綠島自由行套裝行程，多種綠島套裝組合，提供台東綠島來回船票、綠島環島機車、綠島民宿住宿，行程加贈『綠島浮潛體驗』以及『綠島生態導覽』，讓你用輕鬆的綠島套裝自由行，也能深度認識綠島在地文化。
+                            </p>
+                            <div class="d-flex align-items-center">
+                                <p class="text-primary font-weight-bolder mb-0">
+                                    剩下最後 8 組
+                                </p>
+                                <p class="text-primary font-weight-bolder ml-auto h3 mb-0">
+                                    <small>TWD</small>
+                                    $1,280
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.0/d3.min.js' integrity='sha512-DFy79EBbknAc5oC1b/j7GibMV4kE65oBLzUFZDfoV5stfzAoHtTRtm8QShwlVdZoTXrMnQh92NIqkyMhHWdu7w==' crossorigin='anonymous'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.20/c3.min.js' integrity='sha512-+IpCthlNahOuERYUSnKFjzjdKXIbJ/7Dd6xvUp+7bEw0Jp2dg6tluyxLs+zq9BMzZgrLv8886T4cBSqnKiVgUw==' crossorigin='anonymous'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.js'></script>
+    <script src="js/all.js"></script>
+</body>
+

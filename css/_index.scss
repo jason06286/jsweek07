@@ -1,0 +1,22 @@
+p{
+    color: #818A91;
+}
+textarea{
+    border: none;
+    padding: 10px;
+    border-bottom:2px solid #64C3BF ;
+}
+textarea::placeholder,select, option {
+    color: $input-placeholder-color;
+    // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
+    opacity: .6;
+    font-weight: 800;
+}
+
+.card-body .card-title,.card img{
+    cursor: pointer!important;
+}
+.card-body .card-title:hover{
+    color: #64C3BF !important;
+    border-bottom: 3px solid #64C3BF !important;
+}
