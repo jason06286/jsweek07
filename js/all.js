@@ -1,72 +1,67 @@
 // BootStrap Validation
 // Example starter JavaScript for disabling form submissions if there are invalid fields
-(function() {
-  'use strict';
-  window.addEventListener('load', function() {
+(function () {
+  'use strict'
+  window.addEventListener('load', function () {
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.getElementsByClassName('needs-validation');
+    const forms = document.getElementsByClassName('needs-validation')
     // Loop over them and prevent submission
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener('submit', function(event) {
+    const validation = Array.prototype.filter.call(forms, function (form) {
+      form.addEventListener('submit', function (event) {
         if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
+          event.preventDefault()
+          event.stopPropagation()
         }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
-})();
+        form.classList.add('was-validated')
+      }, false)
+    })
+  }, false)
+})()
 
-
-let url='https://raw.githubusercontent.com/hexschool/js-training/main/travelAPI-lv1.json'
+const url = 'https://raw.githubusercontent.com/hexschool/js-training/main/travelAPI-lv1.json'
 let data
-let localData=JSON.parse(localStorage.getItem('newData')) || []
+const localData = JSON.parse(localStorage.getItem('newData')) || []
 
-const listDom=document.querySelector('[data-list]')
-const selectDom=document.querySelector('[data-select]')
-const nowSelectDom=document.querySelector('[data-nowSelect]')
-const btnDom=document.querySelector('[data-btn]')
-const inputDom= document.querySelectorAll('input')
-const formSelectDom=document.querySelector('[data-formSelect]')
-const textareaDom=document.querySelector('[data-textarea]')
-
+const listDom = document.querySelector('[data-list]')
+const selectDom = document.querySelector('[data-select]')
+const nowSelectDom = document.querySelector('[data-nowSelect]')
+const btnDom = document.querySelector('[data-btn]')
+const inputDom = document.querySelectorAll('input')
+const formSelectDom = document.querySelector('[data-formSelect]')
+const textareaDom = document.querySelector('[data-textarea]')
 
 getData()
 
+btnDom.addEventListener('click', getForm)
 
-btnDom.addEventListener('click',getForm)
-
-selectDom.addEventListener('change',function (e) {
+selectDom.addEventListener('change', function (e) {
   render(e.target.value)
 })
 
-function getData() {
+function getData () {
   axios.get(url)
-  .then((res)=>{
-    data=res.data
-    addNewData()
-    renderChart()
-    render()
-  })
+    .then((res) => {
+      data = res.data
+      addNewData()
+      renderChart()
+      render()
+    })
 }
 
-
 function render (location) {
-  let filterData
-  let str=''
+  let str = ''
 
-  filterData=data.filter(item=>{
-    if(!location){
+  const filterData = data.filter(item => {
+    if (!location) {
       return item
     }
-    if(location){
-      return item.area==location
+    if (location) {
+      return item.area === location
     }
   })
 
-  filterData.forEach(item=>{
-    str+=`
+  filterData.forEach(item => {
+    str += `
       <li class="col-12 col-lg-4 list-unstyled mb-5">
         <div class="card shadow border-0">
             <div class="position-relative">
@@ -97,59 +92,54 @@ function render (location) {
       </li>
     `
   })
-  
-  listDom.innerHTML=str
-  nowSelectDom.innerHTML=`本次搜尋共 ${filterData.length} 筆資料`
+
+  listDom.innerHTML = str
+  nowSelectDom.innerHTML = `本次搜尋共 ${filterData.length} 筆資料`
 }
 
-
-function getForm() {
-  let obj={}
-  if (formSelectDom.value=='' || textareaDom.value=='')return
+function getForm () {
+  const obj = {}
+  if (formSelectDom.value === '' || textareaDom.value === '') return
   for (let i = 0; i < inputDom.length; i++) {
-    if (inputDom[i].value=='')return
-    obj[inputDom[i]['id']]=inputDom[i].value
+    if (inputDom[i].value === '') return
+    obj[inputDom[i].id] = inputDom[i].value
   }
-  obj.area=formSelectDom.value
-  obj.description=textareaDom.value
+  obj.area = formSelectDom.value
+  obj.description = textareaDom.value
   localData.push(obj)
-  localStorage.setItem('newData',JSON.stringify(localData))
+  localStorage.setItem('newData', JSON.stringify(localData))
 }
 
-
-function addNewData() {
-  localData.forEach(item=>{
+function addNewData () {
+  localData.forEach(item => {
     data.push(item)
   })
 }
 
-function renderChart() {
-  let totalArea={}
-  let chartData=[]
-  let area
-  
-  data.forEach(item=>{
-    totalArea[item.area] = totalArea[item.area] ? totalArea[item.area] + 1 : 1;
+function renderChart () {
+  const totalArea = {}
+  const chartData = []
+
+  data.forEach(item => {
+    totalArea[item.area] = totalArea[item.area] ? totalArea[item.area] + 1 : 1
   })
 
-  area=Object.keys(totalArea)
-  area.forEach(item=>{
-    let ary=[]
+  const area = Object.keys(totalArea)
+  area.forEach(item => {
+    const ary = []
     ary.push(item)
     ary.push(totalArea[item])
     chartData.push(ary)
   })
 
-  let chart = c3.generate({
-    bindto: "#chart",
+  const chart = c3.generate({
+    bindto: '#chart',
     data: {
       columns: chartData,
-      type : 'donut',
+      type: 'donut'
     },
     donut: {
-      title: "地區"
+      title: '地區'
     }
-  });
-
+  })
 }
-
